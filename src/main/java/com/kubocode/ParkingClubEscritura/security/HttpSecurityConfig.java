@@ -43,38 +43,26 @@ public class HttpSecurityConfig {
                 // 5. Configuramos las reglas de autorización
                 .authorizeHttpRequests(authConfig -> {
                     authConfig.requestMatchers(HttpMethod.POST, "/auth/authenticate").permitAll();
-                    authConfig.requestMatchers(HttpMethod.GET, "/api/sucursales/ubicaciones").permitAll();
-                    authConfig.requestMatchers(HttpMethod.GET, "/api/sucursales/{id}/modal").permitAll();
-                    authConfig.requestMatchers(HttpMethod.GET,"/api/sucursales/listar_sucursalesMovil").permitAll();
                     authConfig.requestMatchers("/error").permitAll();
                     //Privados
-                        //Empresa
-                        authConfig.requestMatchers(HttpMethod.GET,"/api/empresas/**").hasAuthority(Permission.ALL_EMPRESAS.name());
-                        authConfig.requestMatchers(HttpMethod.PUT,"/api/empresas/**").hasAuthority(Permission.ALL_EMPRESAS.name());
-                        authConfig.requestMatchers(HttpMethod.POST,"/api/empresas/**").hasAuthority(Permission.ALL_EMPRESAS.name());
-                        //Sucursales
-                        authConfig.requestMatchers(HttpMethod.GET,"/api/sucursales/**").hasAuthority(Permission.SELECT_UPDATE_SUCURSALES.name());
-                        authConfig.requestMatchers(HttpMethod.PUT,"/api/sucursales/**").hasAuthority(Permission.SELECT_UPDATE_SUCURSALES.name());
-                        authConfig.requestMatchers(HttpMethod.POST,"/api/sucursales/**").hasAuthority(Permission.CREATE_SUCURSALES.name());
-                        authConfig.requestMatchers(HttpMethod.GET,"/plazas/{id}/sucursal").hasAuthority(Permission.GET_PLAZAS.name());
-                        authConfig.requestMatchers(HttpMethod.GET,"/sucursal/{sucursalId}").hasAuthority(Permission.GET_NOMBRE_UBICACION_SUCURSAL.name());
-                        //Empleados
-                        authConfig.requestMatchers(HttpMethod.GET,"/api/empleados/**").hasAuthority(Permission.READ_EMPLEADOS.name());
-                        authConfig.requestMatchers(HttpMethod.PUT,"/api/empleados/**").hasAuthority(Permission.ALL_EMPLEADOS.name());
-                        authConfig.requestMatchers(HttpMethod.POST,"/api/empleados/**").hasAuthority(Permission.ALL_EMPLEADOS.name());
-                        authConfig.requestMatchers(HttpMethod.DELETE,"/api/empleados/**").hasAuthority(Permission.ALL_EMPLEADOS.name());
-                        //Tickets
-                        authConfig.requestMatchers(HttpMethod.GET,"/tickets/**").hasAuthority(Permission.READ_TICKETS.name());
-                        authConfig.requestMatchers(HttpMethod.PUT,"/tickets/**").hasAuthority(Permission.UPDATE_TICKETS.name());
-                        authConfig.requestMatchers(HttpMethod.POST,"/tickets/**").hasAuthority(Permission.READ_TICKETS.name());
+                    //Empresa
+                    authConfig.requestMatchers(HttpMethod.PUT,"/api/empresas/**").hasAuthority(Permission.ALL_EMPRESAS.name());
+                    authConfig.requestMatchers(HttpMethod.POST,"/api/empresas/**").hasAuthority(Permission.ALL_EMPRESAS.name());
+                    //Sucursales
+                    authConfig.requestMatchers(HttpMethod.PUT,"/api/sucursales/**").hasAuthority(Permission.SELECT_UPDATE_SUCURSALES.name());
+                    authConfig.requestMatchers(HttpMethod.POST,"/api/sucursales/**").hasAuthority(Permission.CREATE_SUCURSALES.name());
+                    //Empleados
+                    authConfig.requestMatchers(HttpMethod.PUT,"/api/empleados/**").hasAuthority(Permission.ALL_EMPLEADOS.name());
+                    authConfig.requestMatchers(HttpMethod.POST,"/api/empleados/**").hasAuthority(Permission.ALL_EMPLEADOS.name());
+                    authConfig.requestMatchers(HttpMethod.DELETE,"/api/empleados/**").hasAuthority(Permission.ALL_EMPLEADOS.name());
+                    //Tickets
+                    authConfig.requestMatchers(HttpMethod.PUT,"/tickets/**").hasAuthority(Permission.UPDATE_TICKETS.name());
+                    authConfig.requestMatchers(HttpMethod.POST,"/tickets/**").hasAuthority(Permission.READ_TICKETS.name());
                     //Tarifa
-                    authConfig.requestMatchers(HttpMethod.GET,"/tarifa/**").hasAuthority(Permission.ALL_TARIFAS.name());
                     authConfig.requestMatchers(HttpMethod.PUT,"/tarifa/**").hasAuthority(Permission.ALL_TARIFAS.name());
                     authConfig.requestMatchers(HttpMethod.POST,"/tarifa/**").hasAuthority(Permission.ALL_TARIFAS.name());
                     authConfig.requestMatchers(HttpMethod.PUT,"/tarifa/**").hasAuthority(Permission.ALL_TARIFAS.name());
                     authConfig.requestMatchers(HttpMethod.DELETE,"/tarifa/**").hasAuthority(Permission.ALL_TARIFAS.name());
-                    authConfig.requestMatchers(HttpMethod.GET,"/tarifaMonto/{idSucursal}/{placa}/detalle").hasAuthority(Permission.GET_TARIFAS_MONTO.name());
-
 
                     // El resto se deniega
                     authConfig.anyRequest().denyAll();

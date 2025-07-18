@@ -14,9 +14,6 @@ public class SucursalController {
     @Autowired
     private SucursalService sucursalService;
 
-    @Autowired
-    private ModalSucursalService modalSucursalService;
-
     // 🔹 Crear una nueva sucursal
     @PostMapping
     public ResponseEntity<Sucursal> crear(@RequestBody Sucursal sucursal) {
@@ -37,12 +34,6 @@ public class SucursalController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminar(@PathVariable Long id) {
         return sucursalService.eliminar(id) ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
-    }
-
-    //obtener la sucursal para mi modal movil
-    @GetMapping("/{id}/modal")
-    public ModalSucursalMovilDTO getSucursaMovil(@PathVariable Long id){
-        return modalSucursalService.getSucursal(id);
     }
 
 }
